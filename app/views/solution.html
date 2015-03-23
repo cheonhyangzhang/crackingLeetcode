@@ -1,0 +1,35 @@
+<div class = "txzhang-header">
+	<span ng-bind="problem.no"></span>	
+	<span ng-bind="problem.title"></span>	
+	<span ng-bind="problem.difficulty"></span>
+	<a ng-click="" class="btn btn-primary pull-right">
+    Share
+  	</a>
+</div>
+
+
+<div class="panel panel-default">
+	<div class="panel-body">
+		<div ng-bind-html="problem.description">
+		</div>
+	</div>
+</div>
+
+
+<div class = "txzhang-header">
+<span ng-bind="solution.difficulty"></span>
+<span ng-bind="solution.time"></span>
+<span ng-bind="solution.tags"></span>
+</div>
+
+<div ng-if="solution.analysis" class="panel panel-default">
+	<div class="panel-body">
+		<div ng-bind="solution.analysis">
+		</div>
+	</div>
+</div>
+
+
+<div ng-bind-html="solution.solution">
+</div>
+

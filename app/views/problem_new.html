@@ -1,0 +1,44 @@
+<div class = "txzhang-header">
+  <a ng-click="save()" class="btn btn-primary pull-right">
+    Save
+  </a>
+</div>
+
+<div class="panel panel-default">
+  		<div class="panel-body">
+	<form class="container-fluid">
+		<div class="form-group col-sm-2">
+			<label for="no">No</label>
+			<input class="form-control" id="no" ng-model="problem.no"></input>
+		</div>
+		<div class="form-group col-sm-3">
+			<label for="difficulty">Difficulty</label>
+			<ol style="width:80%;" id="difficulty" class="nya-bs-select dropup" ng-model="problem.difficulty">
+		    <li class="nya-bs-option" value="Easy">
+		      <a>Easy</a>
+		    </li>
+		    <li class="nya-bs-option" value="Medium">
+		      <a>Medium</a>
+		    </li>
+		    <li class="nya-bs-option" value="Hard">
+		      <a>Hard</a>
+		    </li>
+		  	</ol>
+		</div>
+		<div class="form-group col-sm-12">
+			<label for="title">Title</label>
+			<input class="form-control" id="title" ng-model="problem.title"></input>
+		</div>
+		<div class="form-group col-sm-12">
+			<label for="url">Url</label>
+			<input class="form-control" id="url" ng-model="problem.url"></input>
+		</div>
+		<div class="form-group col-sm-12">
+			<label for="description">Description</label> <a target="_blank" href="http://hilite.me">Get Styled Code HTML</a>
+			<textarea class="form-control msd-elastic" id="analysis" ng-model="problem.description"></textarea>
+		</div>
+		
+	</form>
+
+	</div>
+</div>

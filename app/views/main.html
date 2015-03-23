@@ -1,0 +1,45 @@
+ <div class = "txzhang-header">
+  <a href="/#/solution/new" class="btn btn-danger">
+    Compose
+  </a>
+</div>
+<table class="table table-striped">
+  <tr>
+    <td>
+      #
+    </td>
+    <td>
+      Title
+    </td>
+    <td>
+      Tags
+    </td>
+    <td>
+      Difficulty
+    </td>
+    <td>
+      Time
+    </td>
+  </tr>
+  <tr ng-repeat="solution in solutions">
+    <td>
+      <a href="/#/{{user.email}}/solution/{{solution.no}}">
+      {{solution.no}}
+      </a>
+    </td>
+    <td>
+      {{solution.title}}
+    </td>
+    <td>
+      {{solution.tags}}
+    </td>
+    <td>
+      {{solution.difficulty}}
+    </td>
+    <td>
+      {{solution.time}}
+    </td>
+  </tr>
+</table>
+
+

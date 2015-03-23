@@ -1,0 +1,36 @@
+application: crackingleetcode
+version: 0-1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+skip_files:
+- ^(.*/)?.*/node_modules/.*$
+
+handlers:
+#Endpoints handler
+- url: /bower_components
+  static_dir: bower_components
+#Endpoints handler
+- url: /_ah/spi/.*
+  script: rest_api.app
+  secure: always
+
+- url: (.*)/
+  static_files: app\1/index.html
+  upload: app
+  login: required
+  secure: always
+
+- url: (.*)
+  static_files: app\1
+  upload: app
+  login: required
+  secure: always
+
+libraries:
+- name: endpoints
+  version: "1.0"
+- name: pycrypto
+  version: "2.6"
+
