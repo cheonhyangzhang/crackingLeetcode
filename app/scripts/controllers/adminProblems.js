@@ -8,7 +8,8 @@
  * Controller of the crackingLeetcodeApp
  */
 angular.module('crackingLeetcodeApp')
-  .controller('AdminProblemsCtrl', function ($scope, $routeParams) {
+  .controller('AdminProblemsCtrl', function ($scope, $routeParams, authService) {
+    authService.requireAdmin($scope); 
   	console.log($scope.user);
   	$scope.type = $routeParams.type;
   	

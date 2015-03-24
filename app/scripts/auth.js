@@ -4,7 +4,9 @@ SCOPES = ['https://www.googleapis.com/auth/userinfo.email',
           'https://www.googleapis.com/auth/plus.me']
 
 PROJECT_ID = 'crackingleetcode'
-
+var roles = {
+            admin: 0
+};
 var auth_user={'description':'user info'};
 var api_to_load = 1;
 function init(){
@@ -27,6 +29,7 @@ function init(){
         }
   });
 }
+
 function loadEndpoints(){
   api_to_load -=1;
   if (api_to_load == 0){
@@ -43,6 +46,12 @@ function loadPlus(){
         console.log(resp);
         auth_user.displayName = resp.displayName;
         auth_user.email = resp['emails'][0]['value'];
+        if (auth_user.email == 'cenhiangapply@gmail.com'){
+          auth_user.isadmin = true;
+        }
+        else{
+          auth_user.isadmin = false;
+        }
         console.log(auth_user);
         loadEndpoints();
     })

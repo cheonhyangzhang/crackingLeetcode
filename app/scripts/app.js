@@ -62,6 +62,10 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
+      .when('/unauthorized', {
+        templateUrl: 'views/unauthorized.html',
+        controller: 'UnauthorizedCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
