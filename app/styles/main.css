@@ -77,7 +77,13 @@ body {
     border-bottom: 0;
   }
 }
-
+.txzhang-a{
+  text-decoration: none;
+  color:black;
+}
+.txzhang-a:hover{
+  text-decoration: none;
+}
 
 .txzhang-header {
   width:100%;
@@ -86,6 +92,12 @@ body {
   overflow: auto;
   box-shadow: 0 2px 3px #e5e5e5;
   margin-bottom: 10px;
+}
+.txzhang-header-font{
+  font-size:20px;
+}
+.txzhang-hover-pointer{
+ cursor:pointer; 
 }
 .txzhang-box {
   width:100%;
