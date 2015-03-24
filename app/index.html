@@ -2,7 +2,6 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -17,8 +16,8 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <title>Cracking Leetcode</title>
   <body ng-controller="BaseCtrl">
+    <title ng-bind="title"> Cracking Leetcode </title>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -83,10 +82,13 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/base.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/solutions.js"></script>
         <script src="scripts/controllers/admin.js"></script>
         <script src="scripts/controllers/solution.js"></script>
-        <script src="scripts/controllers/problemNew.js"></script>
+        <script src="scripts/controllers/adminProblemNew.js"></script>
+        <script src="scripts/controllers/adminProblem.js"></script>
         <script src="scripts/controllers/problem.js"></script>
+        <script src="scripts/controllers/adminProblems.js"></script>
         <script src="scripts/controllers/solutionNew.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <!-- endbuild -->

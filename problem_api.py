@@ -7,6 +7,9 @@ from protorpc import remote
 import endpoints
 import logging
 
+class TypeMessage(messages.Message):
+	atype = messages.StringField(1)
+
 class ProblemMessage(messages.Message):
 	no = messages.StringField(1)
 	title = messages.StringField(2)
@@ -14,9 +17,11 @@ class ProblemMessage(messages.Message):
 	description = messages.StringField(4)
 	difficulty = messages.StringField(5)
 	url = messages.StringField(6)
+	atype = messages.StringField(7)
 
 class NoMessage(messages.Message):
 	no = messages.StringField(1)
+	atype = messages.StringField(2)
 class SolutionMessage(messages.Message):
 	no = messages.StringField(1)
 	title = messages.StringField(2)
@@ -27,6 +32,7 @@ class SolutionMessage(messages.Message):
 	time = messages.StringField(7)
 	owner = messages.StringField(8)
 	onmyself = messages.StringField(9)
+	atype = messages.StringField(10)
 class ListSolutionMessage(messages.Message):
 	solutions = messages.MessageField(SolutionMessage, 1, repeated = True)
 class ListProblemMessage(messages.Message):
@@ -34,6 +40,7 @@ class ListProblemMessage(messages.Message):
 
 class AccountIdMessage(messages.Message):
 	account = messages.StringField(1)
+	atype = messages.StringField(2)
 class EmptyMessage(messages.Message):
 	pass
 
@@ -46,13 +53,14 @@ class ProblemAPI(remote.Service):
 		) 
 	def problem_insert(self, request):
 		logging.debug("problem_insert")
-		problem = ProblemEntity(id = request.no,
+		problem = ProblemEntity(id = request.atype + "-" + request.no,
 								no = request.no,
 								title = request.title,
 								tags = request.tags,
 								url = request.url,
 								difficulty = request.difficulty,
-								description = request.description 
+								description = request.description,
+								atype = request.atype
 			)
 		problem.put()
 		return request
@@ -64,7 +72,8 @@ class ProblemAPI(remote.Service):
 		) 
 	def problem_get(self, request):
 		logging.debug("problem_get")
-		problem = ProblemEntity.get_by_id(request.no)
+		logging.debug(request)
+		problem = ProblemEntity.get_by_id(request.atype + '-' + request.no)
 
 		return ProblemMessage(
 				no = problem.no,
@@ -72,16 +81,17 @@ class ProblemAPI(remote.Service):
 				tags = problem.tags,
 				difficulty = problem.difficulty,
 				url = problem.url,
-				description = problem.description
+				description = problem.description,
+				atype = problem.atype
 			)
-	@endpoints.method(EmptyMessage, ListProblemMessage,
+	@endpoints.method(TypeMessage, ListProblemMessage,
 		name='list',
 		path='problem/list',
 		http_method='GET'
 		) 
 	def problem_list(self, request):
 		logging.debug("problem_list")
-		qry = ProblemEntity.query()
+		qry = ProblemEntity.query(ProblemEntity.atype == request.atype)
 		problems = qry.fetch()
 		problems_message = []
 		for problem in problems:
@@ -114,7 +124,7 @@ class SolutionAPI(remote.Service):
 		user_email = user.email()
 		user_id = user_email.split('@')[0]
 		logging.debug(user)
-		problem = ProblemEntity.get_by_id(request.no)
+		problem = ProblemEntity.get_by_id(request.atype + '-' + request.no)
 		logging.debug(problem)
 		if problem:
 			problem_title = problem.title
@@ -122,9 +132,10 @@ class SolutionAPI(remote.Service):
 			problem_title = None
 		logging.debug("problem_title")
 		logging.debug(problem_title)
-		solution = SolutionEntity(id = user_email + '-' + request.no,
+		solution = SolutionEntity(id = user_email + '-' + request.atype + '-' + request.no,
 								no = request.no,
 								title = problem_title,
+								atype = request.atype,
 								solution = request.solution,
 								analysis = request.analysis,
 								tags = request.tags,
@@ -141,7 +152,9 @@ class SolutionAPI(remote.Service):
 		http_method='GET'
 		) 
 	def solution_get(self, request):
-		solution = SolutionEntity.get_by_id(request.no)
+		user = endpoints.get_current_user()
+		user_email = user.email()
+		solution = SolutionEntity.get_by_id(user_email + '-' + request.atype +'-'+ request.no)
 		logging.debug("problem_get")
 		logging.debug(request)
 		logging.debug(solution)
@@ -154,6 +167,7 @@ class SolutionAPI(remote.Service):
 				difficulty = solution.difficulty,
 				time = solution.time,
 				owner = solution.owner,
+				atype = solution.atype,
 				onmyself = solution.onmyself 
 			)
 
@@ -163,8 +177,9 @@ class SolutionAPI(remote.Service):
 		http_method='GET'
 		) 
 	def solution_list(self, request):
-		logging.debug("solutions:")
-		qry = SolutionEntity.query(SolutionEntity.owner ==request.account)
+		logging.debug("solutions_list")
+		logging.debug(request)
+		qry = SolutionEntity.query(SolutionEntity.owner ==request.account and SolutionEntity.atype == request.atype)
 		solutions = qry.fetch()
 		solutions_message = []
 		for solution in solutions:

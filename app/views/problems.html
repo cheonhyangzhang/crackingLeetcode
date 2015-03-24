@@ -1,0 +1,44 @@
+ <div class = "txzhang-header">
+  <a href="/#/problem/new" class="btn btn-danger">
+    Create Problem
+  </a>
+</div>
+<table class="table table-striped">
+  <tr>
+    <td>
+      #
+    </td>
+    <td>
+      Title
+    </td>
+    <td>
+      Tags
+    </td>
+    <td>
+      Difficulty
+    </td>
+  </tr>
+  <tr ng-repeat="problem in problems">
+    <td>
+      <a href="/#/{{type}}/problem/{{problem.no}}">
+      {{problem.no}}
+      </a>
+    </td>
+    <td>
+      <a ng-if="problem.url" target="_blank" href="{{problem.url}}">
+      {{problem.title}}
+      </a>
+      <span ng-if="!problem.url">
+      {{problem.title}}
+      </span>
+    </td>
+    <td>
+      {{problem.tags}}
+    </td>
+    <td>
+      {{problem.difficulty}}
+    </td>
+  </tr>
+</table>
+
+

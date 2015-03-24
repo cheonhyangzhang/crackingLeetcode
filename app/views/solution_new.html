@@ -9,15 +9,15 @@
 	<form class="container-fluid">
 		<div class="form-group col-sm-2">
 			<label for="no">No</label>
-			<input class="form-control" id="no" ng-model="problem.no"></input>
+			<input class="form-control" id="no" ng-model="solution.no"></input>
 		</div>
 		<div class="form-group col-sm-2">
 			<label for="time">Time</label>
-			<input class="form-control" id="time" ng-model="problem.time"></input>
+			<input class="form-control" id="time" ng-model="solution.time"></input>
 		</div>
 		<div class="form-group col-sm-3">
 			<label for="difficulty">Difficulty</label>
-			<ol style="width:80%;" id="difficulty" class="nya-bs-select dropup" ng-model="problem.difficulty">
+			<ol style="width:80%;" id="difficulty" class="nya-bs-select dropup" ng-model="solution.difficulty">
 		    <li class="nya-bs-option" value="Easy">
 		      <a>Easy</a>
 		    </li>
@@ -29,9 +29,20 @@
 		    </li>
 		  	</ol>
 		</div>
+			<div class="form-group col-sm-3">
+			<label for="atype">Type</label>
+			<ol style="width:90%;" id="atype" class="nya-bs-select dropup" ng-model="solution.atype">
+		    <li class="nya-bs-option" value="algorithms">
+		      <a>Algorithms</a>
+		    </li>
+		    <li class="nya-bs-option" value="database">
+		      <a>Database</a>
+		    </li>
+		  	</ol>
+		</div>
 		<div class="form-group col-sm-3">
 			<label for="onmyself">I Solved</label>
-			<ol style="width:80%;" id="onmyself" class="nya-bs-select dropup" ng-model="problem.onmyself">
+			<ol style="width:80%;" id="onmyself" class="nya-bs-select dropup" ng-model="solution.onmyself">
 		    <li class="nya-bs-option" value="Yes">
 		      <a>Yes</a>
 		    </li>
@@ -42,11 +53,11 @@
 		</div>
 		<div class="form-group col-sm-12">
 			<label for="analysis">Analysis</label>
-			<textarea class="form-control msd-elastic" id="analysis" ng-model="problem.analysis"></textarea>
+			<textarea class="form-control msd-elastic" id="analysis" ng-model="solution.analysis"></textarea>
 		</div>
 		<div class="form-group col-sm-12">
 		<label for="solution">Solution</label> <a target="_blank" href="http://hilite.me">Get Styled Code HTML</a>
-		<textarea class="form-control msd-elastic" id="solution" ng-model="problem.solution"></textarea>
+		<textarea class="form-control msd-elastic" id="solution" ng-model="solution.solution"></textarea>
 		</div>
 		
 	</form>

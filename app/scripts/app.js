@@ -26,25 +26,37 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/problem/new', {
-        templateUrl: 'views/problem_new.html',
-        controller: 'ProblemNewCtrl'
+      .when('/:useremail/:type/solutions', {
+        templateUrl: 'views/solutions.html',
+        controller: 'SolutionsCtrl'
+      })
+      .when('/:useremail/:type/solution/:no', {
+        templateUrl: 'views/solution.html',
+        controller: 'SolutionCtrl'
+      })
+      .when('/admin/problem/new', {
+        templateUrl: 'views/adminProblemNew.html',
+        controller: 'AdminProblemNewCtrl'
+      })
+      .when('/admin/:type/problems', {
+        templateUrl: 'views/adminProblems.html',
+        controller: 'AdminProblemsCtrl'
+      })
+      .when('/algorithms/problems', {
+        templateUrl: 'views/problems.html',
+        controller: 'ProblemsCtrl'
       })
       .when('/admin', {
         templateUrl: 'views/admin.html',
         controller: 'AdminCtrl'
       })
-      .when('/problem/:no', {
-        templateUrl: 'views/problem.html',
-        controller: 'ProblemCtrl'
+      .when('/admin/:type/problem/:no', {
+        templateUrl: 'views/adminProblem.html',
+        controller: 'AdminProblemCtrl'
       })
       .when('/solution/new', {
         templateUrl: 'views/solution_new.html',
         controller: 'SolutionNewCtrl'
-      })
-      .when('/:useremail/solution/:no', {
-        templateUrl: 'views/solution.html',
-        controller: 'SolutionCtrl'
       })
       .when('/about', {
         templateUrl: 'views/about.html',

@@ -8,13 +8,11 @@
  * Controller of the crackingLeetcodeApp
  */
 angular.module('crackingLeetcodeApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $rootScope) {
+  	$rootScope.title = "Home - Cracking Leetcode";
+  	console.log("user:");
+  	console.log($scope.user);
 
-    gapi.client.crackingleetcode.solution.list({'account':$scope.user.email}).execute(function(resp) {
-      console.log("resp");
-      $scope.solutions = resp.solutions;
-      $scope.$apply();
-    });
 
 
   });

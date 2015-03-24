@@ -10,9 +10,9 @@
 angular.module('crackingLeetcodeApp')
   .controller('AdminCtrl', function ($scope) {
   	console.log($scope.user);
-  	gapi.client.crackingleetcode.problem.list().execute(function(resp) {
-        console.log(resp);
-        $scope.problems = resp.problems;
-        $scope.$apply();
-     });
+  	// gapi.client.crackingleetcode.problem.list().execute(function(resp) {
+   //      console.log(resp);
+   //      $scope.problems = resp.problems;
+   //      $scope.$apply();
+   //   });
 });

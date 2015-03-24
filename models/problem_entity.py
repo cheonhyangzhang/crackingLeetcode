@@ -31,6 +31,7 @@ class SolutionEntity(BaseEntity):
 	time = ndb.StringProperty()
 	owner = ndb.StringProperty()
 	title = ndb.StringProperty()
+	atype = ndb.StringProperty()
 
 class ProblemEntity(BaseEntity):
 
@@ -38,6 +39,7 @@ class ProblemEntity(BaseEntity):
 		Datastore entity class
 	"""
 	no = ndb.StringProperty()
+	atype = ndb.StringProperty()
 	title = ndb.StringProperty()
 	url = ndb.StringProperty()
 	description = ndb.TextProperty()

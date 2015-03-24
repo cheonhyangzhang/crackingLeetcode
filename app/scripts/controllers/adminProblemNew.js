@@ -8,16 +8,19 @@
  * Controller of the crackingLeetcodeApp
  */
 angular.module('crackingLeetcodeApp')
-  .controller('ProblemNewCtrl', function ($scope, $location) {
+  .controller('AdminProblemNewCtrl', function ($scope, $location) {
     $scope.problem = {}
     $scope.problem.difficulty = 'Easy';
+    $scope.problem.atype = 'algorithms';
   	$scope.save = function(){
   		console.log("save");	
   		console.log($scope.problem);
       console.log($scope.problem.description);
   		gapi.client.crackingleetcode.problem.insert($scope.problem).execute(function(resp) {
   			console.log(resp);
-	      	// $location.path("/problem/"+problem.no);
+	      	// $location.path("/admin/" + $scope.problem.atype + "/problem/"+$scope.problem.no);
+          $location.path("/admin/" + $scope.problem.atype + "/problems");
+          $scope.$apply();
 	    });
   	}
 });

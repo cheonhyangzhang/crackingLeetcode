@@ -2,44 +2,18 @@
   <a href="/#/solution/new" class="btn btn-danger">
     Compose
   </a>
+  <a href="/#/admin" class="btn btn-danger">
+    Admin</a>
 </div>
-<table class="table table-striped">
-  <tr>
-    <td>
-      #
-    </td>
-    <td>
-      Title
-    </td>
-    <td>
-      Tags
-    </td>
-    <td>
-      Difficulty
-    </td>
-    <td>
-      Time
-    </td>
-  </tr>
-  <tr ng-repeat="solution in solutions">
-    <td>
-      <a href="/#/{{user.email}}/solution/{{solution.no}}">
-      {{solution.no}}
-      </a>
-    </td>
-    <td>
-      {{solution.title}}
-    </td>
-    <td>
-      {{solution.tags}}
-    </td>
-    <td>
-      {{solution.difficulty}}
-    </td>
-    <td>
-      {{solution.time}}
-    </td>
-  </tr>
-</table>
 
 
+<p>
+<a class="btn btn-primary" href="/#/{{user.email}}/algorithms/solutions">
+  My Solutions
+</a>
+</p>
+<p>
+<a class="btn btn-primary" href="/#/algorithm/problems">
+  Problems
+</a>
+</p>

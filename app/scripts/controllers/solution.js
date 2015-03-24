@@ -10,9 +10,10 @@
 angular.module('crackingLeetcodeApp')
   .controller('SolutionCtrl', function ($scope, $routeParams, $sce) {
     $scope.user = auth_user;
-    var no = $routeParams.no;
-    var useremail = $routeParams.useremail;
-    gapi.client.crackingleetcode.problem.get({'no':no}).execute(function(resp) {
+    $scope.no = $routeParams.no;
+    $scope.type = $routeParams.type;
+    $scope.useremail = $routeParams.useremail;
+    gapi.client.crackingleetcode.problem.get({'no':$scope.no, 'atype':$scope.type}).execute(function(resp) {
       $scope.problem = resp;
       console.log("Problem:");
       console.log($scope.problem);
@@ -23,7 +24,7 @@ angular.module('crackingLeetcodeApp')
       $scope.problem.description = $sce.trustAsHtml($scope.problem.description);
       $scope.$apply();
     });
-    gapi.client.crackingleetcode.solution.get({'no':useremail+'-'+no}).execute(function(resp) {
+    gapi.client.crackingleetcode.solution.get({'no':$scope.no, 'atype':$scope.type}).execute(function(resp) {
      	$scope.solution = resp;
       console.log("Solution:");
       // console.log($scope.solution.solution);
