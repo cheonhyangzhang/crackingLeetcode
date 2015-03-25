@@ -18,8 +18,8 @@ angular.module('crackingLeetcodeApp')
   	$rootScope.title = $scope.user.displayName + " - " + $scope.type + " solutions";
   	
     gapi.client.crackingleetcode.solution.list({'account':$scope.useremail, 'atype':$scope.type}).execute(function(resp) {
-      console.log("resp");
-      console.log(resp);
+      console.log("SolutionsCtrl list:");
+      console.log(resp.solutions);
       $scope.solutions = resp.solutions;
       $scope.$apply();
     });
