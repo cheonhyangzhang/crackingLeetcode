@@ -2,7 +2,7 @@
   <a href="/#/solution/new" class="btn btn-danger">
     Compose
   </a>
-  <a href="/#/admin" class="btn btn-danger pull-right">
+  <a ng-if="user.isadmin == true" href="/#/admin" class="btn btn-danger pull-right">
     Admin</a>
 </div>
 

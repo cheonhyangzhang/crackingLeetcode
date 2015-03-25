@@ -14,7 +14,7 @@
     "angular-route": "1.2.16",
     "angular-elastic": "~2.4.2",
     "nya-bootstrap-select": "~2.0.10",
-    "ng-tags-input": "~2.2.0",
+    "ng-tags-input": "~2.3.0",
     "pnotify": "~2.0.1"
   },
   "devDependencies": {

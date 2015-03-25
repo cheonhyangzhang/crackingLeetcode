@@ -14,8 +14,11 @@ angular.module('crackingLeetcodeApp')
     $scope.solution.onmyself = 'Yes';
     $scope.solution.difficulty = 'Easy';
     $scope.solution.atype = 'algorithms';
+
+
   	$scope.save = function(){
-  		console.log("save");	
+  	  
+    	console.log("save");	
   		console.log($scope.solution);
   		gapi.client.crackingleetcode.solution.insert($scope.solution).execute(function(resp) {
   			console.log(resp);

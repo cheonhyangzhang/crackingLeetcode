@@ -22,6 +22,7 @@ class ProblemMessage(messages.Message):
 class NoMessage(messages.Message):
 	no = messages.StringField(1)
 	atype = messages.StringField(2)
+	owner = messages.StringField(3)
 class SolutionMessage(messages.Message):
 	no = messages.StringField(1)
 	title = messages.StringField(2)
@@ -53,6 +54,7 @@ class ProblemAPI(remote.Service):
 		) 
 	def problem_insert(self, request):
 		logging.debug("problem_insert")
+		logging.debug(request)
 		problem = ProblemEntity(id = request.atype + "-" + request.no,
 								no = request.no,
 								title = request.title,
@@ -152,11 +154,10 @@ class SolutionAPI(remote.Service):
 		http_method='GET'
 		) 
 	def solution_get(self, request):
-		user = endpoints.get_current_user()
-		user_email = user.email()
-		solution = SolutionEntity.get_by_id(user_email + '-' + request.atype +'-'+ request.no)
-		logging.debug("problem_get")
+		logging.debug("solution_get")
 		logging.debug(request)
+		user_email = request.owner
+		solution = SolutionEntity.get_by_id(user_email + '-' + request.atype +'-'+ request.no)
 		logging.debug(solution)
 		return SolutionMessage(
 				no=solution.no,

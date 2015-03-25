@@ -4,33 +4,80 @@
 
 <div class = "txzhang-header">
 	<a href="/#/{{useremail}}/{{type}}/solutions" class="glyphicon glyphicon-chevron-left txzhang-hover-pointer txzhang-a"  aria-hidden="true"></a>
-	<span class="txzhang-header-font" ng-bind="problem.no"></span>	
-	<span class="txzhang-header-font" ng-bind="problem.title"></span>	
-	<span class="txzhang-header-font" ng-bind="problem.difficulty"></span>
+	<span class="txzhang-header-font" ng-bind="problem.no"></span>
+	<span class="txzhang-header-font" ng-bind="problem.title"></span> - <span class="txzhang-header-font" ng-bind="solution.atype"></span>	
+
+	<span ng-show="solution.onmyself =='Yes'" style="color:green;" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+    <span ng-show="solution.onmyself =='No'" style="color:red;" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+
+	<a ng-show="useremail == user.email && editmode == false" ng-click="switchmode()" class="btn btn-primary pull-right" ng-disabled="editmode"> <span>Edit</span> </a>
+	<a ng-show="useremail == user.email && editmode == true" ng-click="save()" class="btn btn-primary pull-right" ng-disabled="!editmode"> <span>Save</span> </a>
 </div>
 
 
 <div class="panel panel-default">
-	<div class="panel-heading">Problem Description</div>
+	<div class="panel-heading">Problem Description
+		<span class="pull-right" ng-bind="problem.difficulty"></span>
+	</div>
 	<div class="panel-body">
 		<div ng-bind-html="problem.description">
 		</div>
 	</div>
 </div>
 
+<div ng-if="editmode == true" class="panel panel-default">
+  		<div class="panel-body">
+	<form class="container-fluid">
+		<div class="form-group col-sm-2">
+			<label for="time">Time</label>
+			<input class="form-control" id="time" ng-model="solution.time"></input>
+		</div>
+		<div class="form-group col-sm-3">
+			<label for="difficulty">Difficulty</label>
+			<ol style="width:80%;" id="difficulty" class="nya-bs-select dropup" ng-model="solution.difficulty">
+		    <li class="nya-bs-option" value="Easy">
+		      <a>Easy</a>
+		    </li>
+		    <li class="nya-bs-option" value="Medium">
+		      <a>Medium</a>
+		    </li>
+		    <li class="nya-bs-option" value="Hard">
+		      <a>Hard</a>
+		    </li>
+		  	</ol>
+		</div>
+		<div class="form-group col-sm-3">
+			<label for="onmyself">I Solved</label>
+			<ol style="width:80%;" id="onmyself" class="nya-bs-select dropup" ng-model="solution.onmyself">
+		    <li class="nya-bs-option" value="Yes">
+		      <a>Yes</a>
+		    </li>
+		    <li class="nya-bs-option" value="No">
+		      <a>No</a>
+		    </li>
+		  	</ol>
+		</div>
 
-<div class="panel panel-default">
-	<div class="panel-heading">Solution Details</div>
-	<div class="panel-body">
-		<span ng-bind="solution.difficulty"></span>
-		<span ng-bind="solution.time"></span>
-		<span ng-bind="solution.tags"></span>
+		<div class="form-group col-sm-12">
+			<label for="analysis">Analysis</label>
+			<textarea class="form-control msd-elastic" id="analysis" ng-model="solution.analysis"></textarea>
+		</div>
+		<div class="form-group col-sm-12">
+		<label for="solution">Solution</label> <a target="_blank" href="http://hilite.me">Get Styled Code HTML</a>
+		<textarea class="form-control msd-elastic" id="solution" ng-model="solution.solution"></textarea>
+		</div>
+		
+	</form>
+
 	</div>
 </div>
-</div>
+
 
 <div ng-if="solution.analysis" class="panel panel-default">
-	<div class="panel-heading">Solution Analysis</div>
+	<div class="panel-heading">Solution Analysis
+		<span class="pull-right" ng-bind="solution.difficulty"></span>
+		<span class="pull-right" ng-bind="solution.tags"></span>
+	</div>
 	<div class="panel-body">
 		<div ng-bind="solution.analysis">
 		</div>
@@ -39,10 +86,15 @@
 
 
 <div class="panel panel-default">
-	<div class="panel-heading">Solution</div>
+	<div class="panel-heading">Solution
+		<span class="pull-right" ng-bind="solution.time"></span>
+	</div>
 	<div class="panel-body">
-			<div ng-bind-html="solution.solution">
+			<div ng-bind-html="solution.solutionDisplay">
 		</div>
 	</div>
 </div>
+
+
+
 
