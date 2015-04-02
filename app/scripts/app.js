@@ -42,7 +42,7 @@ angular
         templateUrl: 'views/adminProblems.html',
         controller: 'AdminProblemsCtrl'
       })
-      .when('/algorithms/problems', {
+      .when('/:type/problems', {
         templateUrl: 'views/problems.html',
         controller: 'ProblemsCtrl'
       })

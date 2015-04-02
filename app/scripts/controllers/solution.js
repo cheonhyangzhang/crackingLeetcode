@@ -45,7 +45,7 @@ angular.module('crackingLeetcodeApp')
     gapi.client.crackingleetcode.solution.get({'owner':$scope.useremail,'no':$scope.no, 'atype':$scope.type}).execute(function(resp) {
      	$scope.solution = resp.result;
       console.log("Solution:");
-      // console.log($scope.solution.solution);
+      console.log($scope.solution);
      	$scope.solution.solutionDisplay = $sce.trustAsHtml($scope.solution.solution);
       $scope.$apply();
     });

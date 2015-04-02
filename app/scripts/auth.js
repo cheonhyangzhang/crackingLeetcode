@@ -57,6 +57,38 @@ function loadPlus(){
     })
   });
 }
+reminder = function(){
+  setTimeout(function(){
+    var now = new Date();
+    gapi.client.crackingleetcode.problem.reminder().execute(function(resp){
+      console.log("reminder"); 
+      console.log(resp);
+        Notification.requestPermission(function (permission) {
+          if (permission !== 'granted') return;
+          var notification = new Notification(resp.no + " : " + resp.title , {
+            icon: '../favicon.ico',
+            body: "Sovled : " + resp.onmyself,
+          });
+          notification.onclick = function () {
+            window.focus();
+            console.log(window.location.host);
+            var redirect_url = "http://" + window.location.host + "/#/" +auth_user.email + "/" + resp.atype + "/solution/" + resp.no;
+            console.log(redirect_url);
+            window.location.replace(redirect_url);
+          };
+        });
+    });
+
+    reminder();
+  }, 1800000);
+  // }, 10000);
+}
+
+Notification.requestPermission(function (permission) {
+  if (permission !== 'granted') return;
+});
+
 function boostrapAngular(){
+  reminder();
   angular.bootstrap(document,['crackingLeetcodeApp']);
 }

@@ -4,6 +4,7 @@ from protorpc import message_types
 from models.problem_entity import ProblemEntity
 from models.problem_entity import SolutionEntity
 from protorpc import remote
+from random import randint
 import endpoints
 import logging
 
@@ -45,6 +46,13 @@ class AccountIdMessage(messages.Message):
 class EmptyMessage(messages.Message):
 	pass
 
+class ProblemReminderMessage(messages.Message):
+	no = messages.StringField(1)
+	title = messages.StringField(2)
+	onmyself = messages.StringField(3)
+	atype = messages.StringField(4)
+
+
 @crackingleetcode_api.api_class(resource_name='problem')
 class ProblemAPI(remote.Service):
 	@endpoints.method(ProblemMessage, ProblemMessage,
@@ -66,6 +74,30 @@ class ProblemAPI(remote.Service):
 			)
 		problem.put()
 		return request
+
+	@endpoints.method(EmptyMessage, ProblemReminderMessage,
+		name='reminder',
+		path='problem/reminder',
+		http_method='GET'
+		) 
+	def problem_reminder(self, request):
+		logging.debug("problem_reminder")
+		logging.debug(request)
+		qry = SolutionEntity.query()
+		# qry = SolutionEntity.query(SolutionEntity.onmyself == 'No')
+		solutions = qry.fetch()
+
+		total = len(solutions)
+		pick = randint(0, total -1) # inclusive
+		solution = solutions[pick]	
+
+
+		return ProblemReminderMessage(
+				no = solution.no,
+				title = solution.title,
+				onmyself = solution.onmyself,
+				atype = solution.atype
+			)
 
 	@endpoints.method(NoMessage, ProblemMessage,
 		name='get',
@@ -180,6 +212,7 @@ class SolutionAPI(remote.Service):
 	def solution_list(self, request):
 		logging.debug("solutions_list")
 		logging.debug(request)
+		logging.debug(request.account)
 		qry = SolutionEntity.query(SolutionEntity.owner ==request.account and SolutionEntity.atype == request.atype)
 		solutions = qry.fetch()
 		solutions_message = []

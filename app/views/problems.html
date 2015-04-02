@@ -1,10 +1,15 @@
  <div class = "txzhang-header">
-  <a href="/#/problem/new" class="btn btn-danger">
-    Create Problem
+  <a href="/#/solution/new" class="btn btn-danger">
+    Compose
   </a>
+  <a class="btn btn-primary" href="/#/{{user.email}}/algorithms/solutions">
+  My Solutions
+</a>
 </div>
 <table class="table table-striped">
   <tr>
+    <td>
+    </td>
     <td>
       #
     </td>
@@ -20,7 +25,18 @@
   </tr>
   <tr ng-repeat="problem in problems">
     <td>
-      <a href="/#/{{type}}/problem/{{problem.no}}">
+
+      <div ng-if="!detailedProblems[problem.no]"> 
+        <span style="color:orange;" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+      </div>
+      <div ng-if="detailedProblems[problem.no]">
+        <span ng-show="detailedProblems[problem.no]['solution']['onmyself'] =='Yes'" style="color:green;" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+      <span ng-show="detailedProblems[problem.no]['solution']['onmyself'] =='No'" style="color:red;" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+       </div>
+
+    </td>      
+    <td>
+      <a href="/#/admin/{{type}}/problem/{{problem.no}}">
       {{problem.no}}
       </a>
     </td>
