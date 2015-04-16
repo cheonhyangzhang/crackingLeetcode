@@ -15,7 +15,8 @@
     "angular-elastic": "~2.4.2",
     "nya-bootstrap-select": "~2.0.10",
     "ng-tags-input": "~2.3.0",
-    "pnotify": "~2.0.1"
+    "pnotify": "~2.0.1",
+    "angular-bootstrap": "~0.12.1"
   },
   "devDependencies": {
     "angular-mocks": "1.2.16",

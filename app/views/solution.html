@@ -57,7 +57,6 @@
 		    </li>
 		  	</ol>
 		</div>
-
 		<div class="form-group col-sm-12">
 			<label for="analysis">Analysis</label>
 			<textarea class="form-control msd-elastic" id="analysis" ng-model="solution.analysis"></textarea>
@@ -71,7 +70,6 @@
 
 	</div>
 </div>
-
 
 <div ng-if="solution.analysis" class="panel panel-default">
 	<div class="panel-heading">Solution Analysis
@@ -90,10 +88,13 @@
 		<span class="pull-right" ng-bind="solution.time"></span>
 	</div>
 	<div class="panel-body">
-			<div ng-bind-html="solution.solutionDisplay">
+		<div ng-bind-html="solution.solutionDisplay">
 		</div>
 	</div>
+
 </div>
+
+
 
 
 

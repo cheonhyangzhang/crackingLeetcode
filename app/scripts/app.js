@@ -18,7 +18,8 @@ angular
     'ngTouch',
     'monospaced.elastic',
     'nya.bootstrap.select',
-    'ngTagsInput'
+    'ngTagsInput',
+    'ui.bootstrap'
   ])
   .config(function ($routeProvider) {
     $routeProvider

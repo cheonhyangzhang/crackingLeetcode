@@ -89,6 +89,6 @@ Notification.requestPermission(function (permission) {
 });
 
 function boostrapAngular(){
-  reminder();
+  // reminder();
   angular.bootstrap(document,['crackingLeetcodeApp']);
 }
