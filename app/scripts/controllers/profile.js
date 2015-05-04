@@ -27,6 +27,7 @@ angular.module('crackingLeetcodeApp')
       console.log("save");
       userService.patch($scope.userProfile, function(resp){
         console.log(resp)
+        $scope.user.profile = resp.result;
       });
     }
 });

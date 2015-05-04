@@ -36,6 +36,7 @@ function loadEndpoints(){
     // var endpoint_url = 'http://localhost:19999/_ah/api';
     var endpoint_url = 'https://crackingleetcode.appspot.com/_ah/api';
     gapi.client.load('crackingleetcode', 'v1', boostrapAngular, endpoint_url);
+
   }
 }
 function loadPlus(){
@@ -91,5 +92,9 @@ reminder = function(){
 
 function boostrapAngular(){
   // reminder();
-  angular.bootstrap(document,['crackingLeetcodeApp']);
+  gapi.client.crackingleetcode.user.get({'email':auth_user.email}).execute(function(resp) {
+      auth_user.profile = resp.result;
+      angular.bootstrap(document,['crackingLeetcodeApp']);
+  });
+ 
 }

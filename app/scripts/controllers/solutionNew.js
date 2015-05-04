@@ -15,6 +15,7 @@ angular.module('crackingLeetcodeApp')
     $scope.solution.difficulty = 'Easy';
     $scope.solution.atype = 'algorithms';
 
+    $scope.solution.lang = $scope.user.profile.main_lang; 
 
   	$scope.save = function(){
   	  
