@@ -8,18 +8,25 @@
  * Controller of the crackingLeetcodeApp
  */
 angular.module('crackingLeetcodeApp')
-  .controller('AdminCtrl', function ($scope, $rootScope, authService) {
+  .controller('ProfileCtrl', function ($scope, $routeParams, $rootScope, authService, userService) {
   	console.log($scope.user);
   	console.log($rootScope);
   	console.log($scope);
-  	authService.requireAdmin($scope);
-    $scope.easyCount = 42;//44
-    $scope.mediumCount = 96;//44
-    $scope.hardCount = 45;//44
-
+    $scope.useremail = $routeParams.useremail;
+    userService.get($scope.useremail, function(resp){
+      $scope.userProfile = resp.result;
+      $scope.$apply();
+    });
   	// gapi.client.crackingleetcode.problem.list().execute(function(resp) {
    //      console.log(resp);
    //      $scope.problems = resp.problems;
    //      $scope.$apply();
    //   });
+
+    $scope.save = function(){
+      console.log("save");
+      userService.patch($scope.userProfile, function(resp){
+        console.log(resp)
+      });
+    }
 });

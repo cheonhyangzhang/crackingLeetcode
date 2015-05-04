@@ -27,6 +27,10 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/profile/:useremail', {
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileCtrl'
+      })
       .when('/:useremail/:type/solutions', {
         templateUrl: 'views/solutions.html',
         controller: 'SolutionsCtrl'

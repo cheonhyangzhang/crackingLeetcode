@@ -31,6 +31,7 @@ class SolutionEntity(BaseEntity):
 	time = ndb.StringProperty()
 	owner = ndb.StringProperty()
 	title = ndb.StringProperty()
+	lang = ndb.StringProperty()
 	atype = ndb.StringProperty()
 
 class ProblemEntity(BaseEntity):

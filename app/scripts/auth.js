@@ -45,6 +45,7 @@ function loadPlus(){
         console.log("LoadPlus");
         console.log(resp);
         auth_user.displayName = resp.displayName;
+        auth_user.image = resp.image;
         auth_user.email = resp['emails'][0]['value'];
         if (auth_user.email == 'cenhiangapply@gmail.com'){
           auth_user.isadmin = true;
@@ -84,9 +85,9 @@ reminder = function(){
   // }, 10000);
 }
 
-Notification.requestPermission(function (permission) {
-  if (permission !== 'granted') return;
-});
+// Notification.requestPermission(function (permission) {
+//   if (permission !== 'granted') return;
+// });
 
 function boostrapAngular(){
   // reminder();

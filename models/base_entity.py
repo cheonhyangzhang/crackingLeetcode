@@ -96,3 +96,4 @@ class BaseEntity(ndb.Model):
 			return False
 		entity.put()
 		return entity
+		

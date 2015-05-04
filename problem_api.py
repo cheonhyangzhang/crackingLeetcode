@@ -35,6 +35,7 @@ class SolutionMessage(messages.Message):
 	owner = messages.StringField(8)
 	onmyself = messages.StringField(9)
 	atype = messages.StringField(10)
+	lang = messages.StringField(11)
 class ListSolutionMessage(messages.Message):
 	solutions = messages.MessageField(SolutionMessage, 1, repeated = True)
 class ListProblemMessage(messages.Message):
@@ -176,6 +177,7 @@ class SolutionAPI(remote.Service):
 								difficulty = request.difficulty,
 								time = request.time,
 								owner = user_email,
+								lang = request.lang,
 								onmyself = request.onmyself 
 			)
 		solution.put()
@@ -201,6 +203,7 @@ class SolutionAPI(remote.Service):
 				time = solution.time,
 				owner = solution.owner,
 				atype = solution.atype,
+				lang = solution.lang,
 				onmyself = solution.onmyself 
 			)
 
@@ -227,6 +230,7 @@ class SolutionAPI(remote.Service):
 					difficulty = solution.difficulty,
 					time = solution.time,
 					owner = solution.owner,
+					lang = solution.lang,
 					onmyself = solution.onmyself 
 					)
 				)

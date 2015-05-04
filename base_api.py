@@ -1,6 +1,7 @@
 import endpoints
 import logging
 from protorpc import remote
+import datetime
 from google.appengine.api import users
 from google.appengine.api import oauth
 
@@ -58,6 +59,41 @@ def check_app_admin(endpoints):
 			logging.debug("check_app_admin: Not allowed " + str(message))
 			raise endpoints.UnauthorizedException(message)
 
+class MessageManager():
+	@classmethod
+	def dictToMessage(cls, messageType, d, keepTZ):
+		logging.debug("dictToMessage")
+		json_fields = []
+		m = messageType()
+		fields = messageType.all_fields()	
+		logging.debug(d)
+		for field in fields:
+			logging.debug(field.name)
+			if field.name in d:
+				v = d[field.name]
+				if field.name in json_fields:
+					message_list = []
+					# for message_dict in v:
+					# 	im = cls.dictToMessage(InterviewerDetailMessage, json.loads(message_dict), False)
+					# 	message_list.append(im)
+					setattr(m, field.name, message_list)
+					continue
+				if type(v) == datetime.datetime:
+					if keepTZ:
+						v_cst_str = v.strftime("%Y-%m-%d")
+					else:
+						utc_zone = tz.gettz('UTC')
+						cst_zone = tz.gettz('America/Chicago')
+						v_utc = v.replace(tzinfo=utc_zone)
+						v_cst = v_utc.astimezone(cst_zone)
+						v_cst_str = v_cst.strftime("%Y-%m-%d")
+						
+
+					setattr(m, field.name, v_cst_str)
+				else:
+					setattr(m, field.name, d.get(field.name))
+
+		return m
 
 crackingleetcode_api = endpoints.api(name='crackingleetcode',version='v1', description='crackingleetcode endpoint api',allowed_client_ids=client_ids)
 # crackingleetcode_api = endpoints.api(name='crackingleetcode',version='v1', description='crackingleetcode endpoint api')

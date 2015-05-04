@@ -17,16 +17,25 @@ angular.module('crackingLeetcodeApp')
     $scope.switchmode = function(){
       $scope.editmode = !$scope.editmode;
     }
+    $scope.htmlcode = function(text){
+      return (
+        text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+    );
+    }
 
     $scope.save = function(){
       $scope.editmode = !$scope.editmode;
       console.log("save");  
-      console.log($scope.solution);
-      console.log($scope.solution.solution);
       gapi.client.crackingleetcode.solution.insert($scope.solution).execute(function(resp) {
         console.log(resp);
-        console.log($scope.user.email + "/solution/" + resp.no);
-        $scope.solution.solutionDisplay = $sce.trustAsHtml($scope.solution.solution);
+        $scope.$apply();
+        $('#code-snippet').html($scope.htmlcode($scope.solution.solution));
+        $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+        });
       });
     }
 
@@ -46,8 +55,12 @@ angular.module('crackingLeetcodeApp')
      	$scope.solution = resp.result;
       console.log("Solution:");
       console.log($scope.solution);
-     	$scope.solution.solutionDisplay = $sce.trustAsHtml($scope.solution.solution);
       $scope.$apply();
+      // $('#code-snippet').innerHTML = $scope.solution.solution;
+      $('#code-snippet').html($scope.htmlcode($scope.solution.solution));
+      $('pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+      });
     });
 
 

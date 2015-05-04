@@ -46,6 +46,32 @@
 		    </li>
 		  	</ol>
 		</div>
+		<div class="form-group col-sm-2">
+			<label for="atype">Language</label>
+			<ol style="width:90%;" id="atype" class="nya-bs-select dropup" ng-model="solution.lang">
+		    <li class="nya-bs-option" value="java">
+		      <a>Java</a>
+		    </li>
+		    <li class="nya-bs-option" value="python">
+		      <a>Python</a>
+		    </li>
+		    <li class="nya-bs-option" value="c++">
+		      <a>C++</a>
+		    </li>
+		    <li class="nya-bs-option" value="c#">
+		      <a>C#</a>
+		    </li>
+		    <li class="nya-bs-option" value="c">
+		      <a>C</a>
+		    </li>
+		    <li class="nya-bs-option" value="javascript">
+		      <a>Javascript</a>
+		    </li>
+		    <li class="nya-bs-option" value="ruby">
+		      <a>Ruby</a>
+		    </li>
+		  	</ol>
+		</div>
 		<div class="form-group col-sm-3">
 			<label for="onmyself">I Solved</label>
 			<ol style="width:80%;" id="onmyself" class="nya-bs-select dropup" ng-model="solution.onmyself">
@@ -57,12 +83,13 @@
 		    </li>
 		  	</ol>
 		</div>
+
 		<div class="form-group col-sm-12">
 			<label for="analysis">Analysis</label>
 			<textarea class="form-control msd-elastic" id="analysis" ng-model="solution.analysis"></textarea>
 		</div>
 		<div class="form-group col-sm-12">
-		<label for="solution">Solution</label> <a target="_blank" href="http://hilite.me">Get Styled Code HTML</a>
+		<label for="solution">Solution</label> 
 		<textarea class="form-control msd-elastic" id="solution" ng-model="solution.solution"></textarea>
 		</div>
 		
@@ -83,16 +110,19 @@
 </div>
 
 
+
+
 <div class="panel panel-default">
 	<div class="panel-heading">Solution
-		<span class="pull-right" ng-bind="solution.time"></span>
+		<span class="pull-right" ng-bind="solution.lang"></span>
 	</div>
-	<div class="panel-body">
-		<div ng-bind-html="solution.solutionDisplay">
-		</div>
-	</div>
+	<pre><code class="{{solution.lang}}" id="code-snippet"></code></pre>
 
 </div>
+
+
+
+
 
 
 
