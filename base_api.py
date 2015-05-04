@@ -5,7 +5,7 @@ import datetime
 from google.appengine.api import users
 from google.appengine.api import oauth
 
-client_ids = ['686946052664-ab0boq4mu1j76sb56dfiljr2tl175vro.apps.googleusercontent.com']
+client_ids = ['686946052664-ab0boq4mu1j76sb56dfiljr2tl175vro.apps.googleusercontent.com', endpoints.API_EXPLORER_CLIENT_ID]
 
 # check_auth will throw exception if not valid auth
 # only motorola account and specified service account could access this api

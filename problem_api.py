@@ -216,8 +216,10 @@ class SolutionAPI(remote.Service):
 		logging.debug("solutions_list")
 		logging.debug(request)
 		logging.debug(request.account)
-		qry = SolutionEntity.query(SolutionEntity.owner ==request.account and SolutionEntity.atype == request.atype)
+		qry = SolutionEntity.query(SolutionEntity.owner == request.account, SolutionEntity.atype == request.atype)
+		# qry = SolutionEntity.query(SolutionEntity.owner == request.account)
 		solutions = qry.fetch()
+		logging.debug(solutions)
 		solutions_message = []
 		for solution in solutions:
 			solutions_message.append(
