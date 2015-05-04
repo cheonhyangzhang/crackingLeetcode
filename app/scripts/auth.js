@@ -92,7 +92,9 @@ reminder = function(){
 
 function boostrapAngular(){
   // reminder();
-  gapi.client.crackingleetcode.user.get({'email':auth_user.email}).execute(function(resp) {
+  gapi.client.crackingleetcode.user.get({'email':auth_user.email, 'displayName': auth_user.displayName, 'avatar':auth_user.image.url}).execute(function(resp) {
+      console.log("user.get");
+      console.log(resp);
       auth_user.profile = resp.result;
       angular.bootstrap(document,['crackingLeetcodeApp']);
   });

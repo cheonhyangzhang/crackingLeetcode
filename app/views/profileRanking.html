@@ -1,0 +1,13 @@
+<div class = "txzhang-header">
+  <span style="font-size:20px;"> Ranking </span>
+</div>
+
+
+<div class="panel panel-default">
+	<div class="panel-body">
+		<div class = "txzhang-header" ng-repeat="user in users">
+			<img ng-src="{{user.avatar}}" width="30" height="30" alt="folder" class="img-circle"> 
+			<a href="/#/profile/{{user.email}}"><span>{{user.displayName}} ( {{user.email}} )</span></a>
+		</div>
+	</div>
+</div>

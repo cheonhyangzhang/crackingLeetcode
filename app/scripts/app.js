@@ -27,6 +27,10 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/profile/ranking', {
+        templateUrl: 'views/profileRanking.html',
+        controller: 'ProfileRankingCtrl'
+      })
       .when('/profile/:useremail', {
         templateUrl: 'views/profile.html',
         controller: 'ProfileCtrl'

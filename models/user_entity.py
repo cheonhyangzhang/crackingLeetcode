@@ -25,8 +25,8 @@ class UserEntity(BaseEntity):
 	email = ndb.StringProperty()
 	main_lang = ndb.StringProperty()
 	solution_rating = ndb.StringProperty()
-	easy_solved = ndb.StringProperty()
-	medium_solved = ndb.StringProperty()
-	hard_solved = ndb.StringProperty()
+	sovled_statics = ndb.TextProperty()
+	displayName = ndb.StringProperty()
+	avatar = ndb.StringProperty()
 
 

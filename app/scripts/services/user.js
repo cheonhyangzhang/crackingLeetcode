@@ -10,6 +10,11 @@ angular.module('crackingLeetcodeApp')
 			gapi.client.crackingleetcode.user.patch(user).execute(function(resp) {
 				callback(resp);
 			});
+        },
+        list: function (callback) {
+            gapi.client.crackingleetcode.user.list({}).execute(function(resp) {
+                callback(resp);
+            });
         }
     };
 });
