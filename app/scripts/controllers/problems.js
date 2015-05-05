@@ -11,24 +11,47 @@ angular.module('crackingLeetcodeApp')
   .controller('ProblemsCtrl', function ($scope, $routeParams) {
   	console.log("ProblemCtrl");
   	console.log($scope.user);
-  	var type = $routeParams.type;
+  	$scope.type = $routeParams.type;
+    $scope.toSolveProblems = [];
+    $scope.solvedProblems = [];
   	$scope.detailedProblems = {};
-  	gapi.client.crackingleetcode.problem.list({'atype':type}).execute(function(resp) {
+    $scope.solved = {'Easy':0, 'Medium':0, 'Hard':0};
+  	gapi.client.crackingleetcode.problem.list({'atype':$scope.type}).execute(function(resp) {
         console.log(resp);
-        $scope.problems = resp.problems;
+        if (typeof(resp.problems) != 'undefined'){
+          $scope.problems = resp.problems;
+        }
+        else{
+          $scope.problems = [];
+        }
         // $.each($scope.problems, function(index, value){
         	// $scope.detailedProblems[value.no] = {'problem':value};
         // });
         $scope.$apply();
         console.log($scope.user.email);
-         gapi.client.crackingleetcode.solution.list({'account':$scope.user.email, 'atype':type}).execute(function(resp) {
+         gapi.client.crackingleetcode.solution.list({'account':$scope.user.email, 'atype':$scope.type}).execute(function(resp) {
 	      console.log("SolutionsCtrl list:");
 	      console.log(resp);
-	      $scope.solutions = resp.solutions;
+         if (typeof(resp.solutions) != 'undefined'){
+            $scope.solutions = resp.solutions;
+          }
+          else{
+            $scope.solutions = [];
+          }
+	 
 	      $.each($scope.solutions, function(index, value){
         	$scope.detailedProblems[value.no] = {'solution' : value};
         	// $scope.detailedProblems[value.no]['solution'] = value;
 	      });
+        $.each($scope.problems, function(index, value){
+          if (value.no in $scope.detailedProblems){
+            $scope.solvedProblems.push(value);
+            $scope.solved[value.difficulty] +=1;
+          } 
+          else{
+            $scope.toSolveProblems.push(value);
+          }
+        });
 	      console.log($scope.detailedProblems);
 	      $scope.$apply();
 	    });

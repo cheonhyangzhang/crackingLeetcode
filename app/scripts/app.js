@@ -38,7 +38,7 @@ angular
       .when('/:useremail/:type/solutions', {
         templateUrl: 'views/solutions.html',
         controller: 'SolutionsCtrl'
-      })
+      })// will be deprecated
       .when('/:useremail/:type/solution/:no', {
         templateUrl: 'views/solution.html',
         controller: 'SolutionCtrl'
@@ -51,7 +51,7 @@ angular
         templateUrl: 'views/adminProblems.html',
         controller: 'AdminProblemsCtrl'
       })
-      .when('/:type/problems', {
+      .when('/:useremail/:type/problems', {
         templateUrl: 'views/problems.html',
         controller: 'ProblemsCtrl'
       })

@@ -1,14 +1,21 @@
- <div class = "txzhang-header">
+<div class = "txzhang-header">
   <a href="/#/solution/new" class="btn btn-danger">
     Compose
   </a>
-  <a class="btn btn-primary" href="/#/{{user.email}}/algorithms/solutions">
-  My Solutions
-</a>
 </div>
+<h4> Overall </h4>
+<progressbar animate="false" value="solutions.length" max="184" type="success"><b>{{solutions.length}}/184</b></progressbar>
+<div class = "txzhang-header">
+  <span class="col-sm-4">Easy: {{solved['Easy']}} / 45 </span>
+  <span class="col-sm-4">Medium: {{solved['Medium']}} / 96 </span>
+  <span class="col-sm-4">Hard: {{solved['Hard']}} / 45</span>
+</div>
+
+<h4> Not solved </h4>
 <table class="table table-striped">
   <tr>
     <td>
+      
     </td>
     <td>
       #
@@ -23,9 +30,56 @@
       Difficulty
     </td>
   </tr>
-  <tr ng-repeat="problem in problems">
+  <tr ng-repeat="problem in toSolveProblems">
+        
     <td>
-
+      <a href="/#/{{user.email}}/{{type}}/solution/{{problem.no}}">
+      <span class="glyphicon glyphicon-edit"></span>
+      </a>
+    </td>   
+    <td>
+      {{problem.no}}
+    </td>
+    <td>
+      <a ng-if="problem.url" target="_blank" href="{{problem.url}}">
+      {{problem.title}}
+      </a>
+      <span ng-if="!problem.url">
+      {{problem.title}}
+      </span>
+    </td>
+    <td>
+      {{problem.tags}}
+    </td>
+    <td>
+      {{problem.difficulty}}
+    </td>
+  </tr>
+</table>
+<h4> Solved </h4>
+<table class="table table-striped">
+  <tr>
+    <td>
+      Mark
+    </td>
+    <td style="display:none;">
+      Sort
+    </td>
+    <td>
+      #
+    </td>
+    <td>
+      Title
+    </td>
+    <td>
+      Tags
+    </td>
+    <td>
+      Difficulty
+    </td>
+  </tr>
+  <tr ng-repeat="problem in solvedProblems">
+    <td>
       <div ng-if="!detailedProblems[problem.no]"> 
         <span style="color:orange;" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
       </div>
@@ -33,10 +87,18 @@
         <span ng-show="detailedProblems[problem.no]['solution']['onmyself'] =='Yes'" style="color:green;" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
       <span ng-show="detailedProblems[problem.no]['solution']['onmyself'] =='No'" style="color:red;" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
        </div>
-
     </td>      
+    <td style="display:none;">
+      <div ng-if="!detailedProblems[problem.no]"> 
+        3
+      </div>
+      <div ng-if="detailedProblems[problem.no]">
+        <span ng-show="detailedProblems[problem.no]['solution']['onmyself'] =='Yes'" aria-hidden="true">1</span>
+      <span ng-show="detailedProblems[problem.no]['solution']['onmyself'] =='No'" >2</span>
+       </div>
+    </td>   
     <td>
-      <a href="/#/admin/{{type}}/problem/{{problem.no}}">
+      <a href="/#/{{user.email}}/{{type}}/solution/{{problem.no}}">
       {{problem.no}}
       </a>
     </td>

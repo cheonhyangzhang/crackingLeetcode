@@ -193,6 +193,9 @@ class SolutionAPI(remote.Service):
 		user_email = request.owner
 		solution = SolutionEntity.get_by_id(user_email + '-' + request.atype +'-'+ request.no)
 		logging.debug(solution)
+		if not solution:
+			message = "Solution not found for " + request.no
+			raise endpoints.NotFoundException(message)
 		return SolutionMessage(
 				no=solution.no,
 				title=solution.title,
