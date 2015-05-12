@@ -3,8 +3,10 @@ from base_api import MessageManager
 from protorpc import messages
 from protorpc import message_types
 from models.user_entity import UserEntity
+from models.problem_entity import SolutionEntity
 from protorpc import remote
 from random import randint
+import json
 import endpoints
 import logging
 
@@ -50,6 +52,33 @@ class UserAPI(remote.Service):
 				email = request.email
 				)
 		user.main_lang = request.main_lang
+		user.put()
+		return MessageManager.dictToMessage(UserMessage, user.toDict(),  False)
+
+	@endpoints.method(UserEmailMessage, UserMessage,
+		name='count',
+		path='user/count',
+		http_method='GET'
+		) 
+	def user_count(self, request):
+		logging.debug("user.count")
+		user = UserEntity.get_by_id(request.email)
+		if not user:
+			user = UserEntity(
+				id = request.email,
+				email = request.email
+				)
+		qry = SolutionEntity.query(SolutionEntity.owner == request.email)
+
+		sovled_statics = {}
+		solutions = qry.fetch()
+		for atype in ['algorithms']:
+			sovled_statics[atype] = {'Easy':0,'Medium':0, 'Hard':0, 'Total':0}
+		for solution in solutions:
+			atype = solution.atype	
+			sovled_statics[atype][solution.difficulty] += 1
+			sovled_statics[atype]['Total'] += 1
+		user.sovled_statics = json.dumps(sovled_statics)
 		user.put()
 		return MessageManager.dictToMessage(UserMessage, user.toDict(),  False)
 

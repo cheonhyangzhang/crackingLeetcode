@@ -16,6 +16,8 @@ angular.module('crackingLeetcodeApp')
     $scope.solvedProblems = [];
   	$scope.detailedProblems = {};
     $scope.solved = {'Easy':0, 'Medium':0, 'Hard':0};
+    $scope.totals = {'Easy':0, 'Medium':0, 'Hard':0};
+
   	gapi.client.crackingleetcode.problem.list({'atype':$scope.type}).execute(function(resp) {
         console.log(resp);
         if (typeof(resp.problems) != 'undefined'){
@@ -38,7 +40,6 @@ angular.module('crackingLeetcodeApp')
           else{
             $scope.solutions = [];
           }
-	 
 	      $.each($scope.solutions, function(index, value){
         	$scope.detailedProblems[value.no] = {'solution' : value};
         	// $scope.detailedProblems[value.no]['solution'] = value;
@@ -51,8 +52,9 @@ angular.module('crackingLeetcodeApp')
           else{
             $scope.toSolveProblems.push(value);
           }
+          $scope.totals[value.difficulty] +=1;
         });
-	      console.log($scope.detailedProblems);
+	      // console.log($scope.detailedProblems);
 	      $scope.$apply();
 	    });
     });

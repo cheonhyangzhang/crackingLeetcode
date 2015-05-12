@@ -12,10 +12,13 @@ angular.module('crackingLeetcodeApp')
     authService.requireAdmin($scope); 
   	console.log($scope.user);
   	$scope.type = $routeParams.type;
-  	
+  	$scope.count = {'Easy':0, 'Medium':0, 'Hard':0};
   	gapi.client.crackingleetcode.problem.list({'atype':$scope.type}).execute(function(resp) {
         console.log(resp);
         $scope.problems = resp.problems;
+        $.each($scope.problems, function(index, value){
+          $scope.count[value.difficulty]+=1;
+        });
         $scope.$apply();
      });
 });

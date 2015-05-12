@@ -3,11 +3,41 @@
 </div>
 
 
-<div class="panel panel-default">
-	<div class="panel-body">
-		<div class = "txzhang-header" ng-repeat="user in users">
-			<img ng-src="{{user.avatar}}" width="30" height="30" alt="folder" class="img-circle"> 
-			<a href="/#/profile/{{user.email}}"><span>{{user.displayName}} ( {{user.email}} )</span></a>
-		</div>
-	</div>
-</div>
+
+			<table class="table table-bordered">
+				<tr>
+					<td>
+						User
+					</td>
+					<td>
+						Easy
+					</td>
+					<td>
+						Medium
+					</td>
+					<td>
+						Hard
+					</td>
+					<td>
+						Total
+					</td>
+				</tr>
+				<tr ng-repeat="user in users">
+					<td>
+					<img ng-src="{{user.avatar}}" width="30" height="30" alt="folder" class="img-circle"> 
+					<a href="/#/profile/{{user.email}}"><span>{{user.displayName}} </span></a>
+					</td>
+					<td>
+					{{user.sovled_statics.algorithms.Easy}}
+					</td>
+					<td>
+					{{user.sovled_statics.algorithms.Medium}}
+					</td>
+					<td>
+					{{user.sovled_statics.algorithms.Hard}}
+					</td>
+					<td>
+					{{user.sovled_statics.algorithms.Total}}
+					</td>
+				</tr>
+			</table>

@@ -10,6 +10,8 @@ import logging
 
 class TypeMessage(messages.Message):
 	atype = messages.StringField(1)
+class UserEmailMessage(messages.Message):
+	email = messages.StringField(1)
 
 class ProblemMessage(messages.Message):
 	no = messages.StringField(1)
@@ -36,6 +38,7 @@ class SolutionMessage(messages.Message):
 	onmyself = messages.StringField(9)
 	atype = messages.StringField(10)
 	lang = messages.StringField(11)
+	own_difficulty = messages.StringField(12)
 class ListSolutionMessage(messages.Message):
 	solutions = messages.MessageField(SolutionMessage, 1, repeated = True)
 class ListProblemMessage(messages.Message):
@@ -175,6 +178,7 @@ class SolutionAPI(remote.Service):
 								analysis = request.analysis,
 								tags = request.tags,
 								difficulty = request.difficulty,
+								own_difficulty = request.own_difficulty,
 								time = request.time,
 								owner = user_email,
 								lang = request.lang,
@@ -203,12 +207,31 @@ class SolutionAPI(remote.Service):
 				analysis = solution.analysis,
 				tags = solution.tags,
 				difficulty = solution.difficulty,
+				own_difficulty = solution.own_difficulty,
 				time = solution.time,
 				owner = solution.owner,
 				atype = solution.atype,
 				lang = solution.lang,
 				onmyself = solution.onmyself 
 			)
+
+	@endpoints.method(UserEmailMessage, EmptyMessage,
+		name='batch',
+		path='solution/batch',
+		http_method='GET'
+		) 
+	def solution_batch(self, request):
+		logging.debug("solutions_batch")
+		qry = ProblemEntity.query()
+		problems = qry.fetch()
+		for problem in problems:
+			solution = SolutionEntity.get_by_id(request.account+"-"+problem.atype+"-"+problem.no)
+			if solution:
+				solution.own_difficulty = solution.difficulty
+				solution.difficulty = problem.difficulty
+				test[solution.difficulty] +=1
+				solution.put()
+		return EmptyMessage()
 
 	@endpoints.method(AccountIdMessage, ListSolutionMessage,
 		name='list',
@@ -233,6 +256,7 @@ class SolutionAPI(remote.Service):
 					analysis = solution.analysis,
 					tags = solution.tags,
 					difficulty = solution.difficulty,
+					own_difficulty = solution.own_difficulty,
 					time = solution.time,
 					owner = solution.owner,
 					lang = solution.lang,

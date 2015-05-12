@@ -14,6 +14,10 @@ angular.module('crackingLeetcodeApp')
       console.log("users");
       console.log(resp);
       $scope.users = resp.users;
+      $.each($scope.users, function(index, value){
+      	console.log(value);
+      	value.sovled_statics = JSON.parse(value.sovled_statics);
+      });
       $scope.$apply();
     });
 });

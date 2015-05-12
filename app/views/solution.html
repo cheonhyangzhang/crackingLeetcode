@@ -11,7 +11,7 @@
     <span ng-show="solution.onmyself =='No'" style="color:red;" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 
 	<a ng-show="useremail == user.email && editmode == false" ng-click="switchmode()" class="btn btn-primary pull-right" ng-disabled="editmode"> <span>Edit</span> </a>
-	<a ng-show="useremail == user.email && editmode == true" ng-click="save()" class="btn btn-primary pull-right" ng-disabled="!editmode"> <span>Save</span> </a>
+	<a ng-show="useremail == user.email && editmode == true" ng-click="save()" class="btn btn-primary pull-right" ng-disabled="!editmode&problem_loaded&solution_loaded"> <span>Save</span> </a>
 </div>
 
 
@@ -33,8 +33,8 @@
 			<input class="form-control" id="time" ng-model="solution.time"></input>
 		</div>
 		<div class="form-group col-sm-3">
-			<label for="difficulty">Difficulty</label>
-			<ol style="width:80%;" id="difficulty" class="nya-bs-select dropup" ng-model="solution.difficulty">
+			<label for="own_difficulty">Own Difficulty</label>
+			<ol style="width:80%;" id="own_difficulty" class="nya-bs-select dropup" ng-model="solution.own_difficulty">
 		    <li class="nya-bs-option" value="Easy">
 		      <a>Easy</a>
 		    </li>

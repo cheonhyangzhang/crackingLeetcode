@@ -13,6 +13,7 @@ angular.module('crackingLeetcodeApp')
   	console.log($rootScope);
   	console.log($scope);
   	authService.requireAdmin($scope);
+    
     $scope.easyCount = 42;//44
     $scope.mediumCount = 96;//44
     $scope.hardCount = 45;//44

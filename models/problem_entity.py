@@ -27,6 +27,7 @@ class SolutionEntity(BaseEntity):
 	analysis = ndb.TextProperty()
 	tags = ndb.StringProperty(repeated = True)
 	difficulty = ndb.StringProperty()
+	own_difficulty = ndb.StringProperty()
 	onmyself = ndb.StringProperty()
 	time = ndb.StringProperty()
 	owner = ndb.StringProperty()

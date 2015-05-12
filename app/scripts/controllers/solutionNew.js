@@ -26,6 +26,9 @@ angular.module('crackingLeetcodeApp')
         console.log($scope.user.email + "/solution/" + resp.no);
 	      $location.path($scope.user.email + "/" + $scope.solution.atype + "/solution/" + resp.no);
         $scope.$apply();
+        gapi.client.crackingleetcode.user.count({'email':$scope.user.email}).execute(function(resp) {
+            console.log("count finished");
+        });
 	    });
   	}
 });

@@ -14,6 +14,8 @@ angular.module('crackingLeetcodeApp')
     $scope.no = $routeParams.no;
     $scope.type = $routeParams.type;
     $scope.useremail = $routeParams.useremail;
+    $scope.problem_loaded = false;
+    $scope.solution_loaded = false;
     $scope.switchmode = function(){
       $scope.editmode = !$scope.editmode;
     }
@@ -29,6 +31,7 @@ angular.module('crackingLeetcodeApp')
     $scope.save = function(){
       $scope.editmode = !$scope.editmode;
       console.log("save");  
+      $scope.solution.difficulty = $scope.problem.difficulty;
       gapi.client.crackingleetcode.solution.insert($scope.solution).execute(function(resp) {
         console.log(resp);
         $scope.$apply();
@@ -36,7 +39,11 @@ angular.module('crackingLeetcodeApp')
         $('pre code').each(function(i, block) {
             hljs.highlightBlock(block);
         });
+        gapi.client.crackingleetcode.user.count({'email':$scope.user.email}).execute(function(resp) {
+            console.log("count finished");
+        });
       });
+
     }
 
 
@@ -50,6 +57,7 @@ angular.module('crackingLeetcodeApp')
 
       $scope.problem.description = $sce.trustAsHtml($scope.problem.description);
       $scope.$apply();
+      $scope.problem_loaded = true;
     });
     gapi.client.crackingleetcode.solution.get({'owner':$scope.useremail,'no':$scope.no, 'atype':$scope.type}).execute(function(resp) {
       console.log("solution.get resp");
@@ -58,9 +66,12 @@ angular.module('crackingLeetcodeApp')
         $scope.editmode = true;
         $scope.solution = {};
         $scope.solution.onmyself = 'Yes';
+        $scope.solution.no = $scope.problem.no;
+        $scope.solution.atype = $scope.problem.atype;
         $scope.solution.lang = $scope.user.profile.main_lang;
         console.log($scope.problem.difficulty);
         $scope.solution.difficulty = $scope.problem.difficulty;
+        
       }
       else{
        	$scope.solution = resp.result;
@@ -72,6 +83,7 @@ angular.module('crackingLeetcodeApp')
             hljs.highlightBlock(block);
         });
       }
+      $scope.solution_loaded = true;
       $scope.$apply();
     });
 

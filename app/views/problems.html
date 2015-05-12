@@ -4,11 +4,11 @@
   </a>
 </div>
 <h4> Overall </h4>
-<progressbar animate="false" value="solutions.length" max="184" type="success"><b>{{solutions.length}}/184</b></progressbar>
+<progressbar animate="false" value="(solutions.length * 100 ) / problems.length" max="100" style="min-width:2em;" type="success"><b>{{solutions.length}}/{{problems.length}}</b></progressbar>
 <div class = "txzhang-header">
-  <span class="col-sm-4">Easy: {{solved['Easy']}} / 45 </span>
-  <span class="col-sm-4">Medium: {{solved['Medium']}} / 96 </span>
-  <span class="col-sm-4">Hard: {{solved['Hard']}} / 45</span>
+  <span class="col-sm-4">Easy: {{solved['Easy']}} / {{totals['Easy']}} </span>
+  <span class="col-sm-4">Medium: {{solved['Medium']}} / {{totals['Medium']}} </span>
+  <span class="col-sm-4">Hard: {{solved['Hard']}} / {{totals['Hard']}} </span>
 </div>
 
 <h4> Not solved </h4>
