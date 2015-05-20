@@ -16,7 +16,9 @@ angular.module('crackingLeetcodeApp')
       $scope.users = resp.users;
       $.each($scope.users, function(index, value){
       	console.log(value);
-      	value.sovled_statics = JSON.parse(value.sovled_statics);
+        if (typeof(value.sovled_statics) !== 'undefined'){
+      	 value.sovled_statics = JSON.parse(value.sovled_statics);
+        }
       });
       $scope.$apply();
     });

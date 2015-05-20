@@ -8,7 +8,7 @@
  * Controller of the crackingLeetcodeApp
  */
 angular.module('crackingLeetcodeApp')
-  .controller('ProblemsCtrl', function ($scope, $routeParams) {
+  .controller('ProblemsCtrl', function ($scope, $routeParams, userService) {
   	console.log("ProblemCtrl");
   	console.log($scope.user);
   	$scope.type = $routeParams.type;
@@ -17,6 +17,13 @@ angular.module('crackingLeetcodeApp')
   	$scope.detailedProblems = {};
     $scope.solved = {'Easy':0, 'Medium':0, 'Hard':0};
     $scope.totals = {'Easy':0, 'Medium':0, 'Hard':0};
+
+    userService.get($routeParams.useremail, function(resp){
+      $scope.userProfile = resp.result;
+      console.log("userProfile");
+      console.log($scope.userProfile);
+      $scope.$apply();
+    });
 
   	gapi.client.crackingleetcode.problem.list({'atype':$scope.type}).execute(function(resp) {
         console.log(resp);
@@ -31,7 +38,7 @@ angular.module('crackingLeetcodeApp')
         // });
         $scope.$apply();
         console.log($scope.user.email);
-         gapi.client.crackingleetcode.solution.list({'account':$scope.user.email, 'atype':$scope.type}).execute(function(resp) {
+         gapi.client.crackingleetcode.solution.list({'account':$routeParams.useremail, 'atype':$scope.type}).execute(function(resp) {
 	      console.log("SolutionsCtrl list:");
 	      console.log(resp);
          if (typeof(resp.solutions) != 'undefined'){

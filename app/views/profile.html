@@ -1,5 +1,7 @@
  <div class = "txzhang-header">
-  <span style="font-size:20px;" ng-bind="user.displayName"></span>
+ <img ng-src="{{userProfile.avatar}}" width="30" height="30" alt="folder" class="img-circle"> 
+  <span ng-show="userProfile.displayName" style="font-size:20px;" ng-bind="userProfile.displayName"></span>
+  <span ng-show="!userProfile.displayName" style="font-size:20px;" ng-bind="userProfile.email"></span>
   <a ng-show="useremail == user.email " ng-click="save()" class="btn btn-primary pull-right" > <span>Save</span> </a>
 </div>
 
@@ -42,4 +44,22 @@
 	</form>
 
 	</div>
+</div>
+<div class="panel panel-default">
+  	<div class="panel-body">
+		<div class="panel panel-default">
+			<div class="panel-heading">LeetCode</div>
+  			<div class="panel-body">
+		  		<a class="btn btn-primary" href="/#/{{userProfile.email}}/algorithms/problems">
+				  Algorithms Problems
+				</a>	
+	  		</div>
+  		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">Project Euler</div>
+  			<div class="panel-body">
+		  		
+	  		</div>
+  		</div>
+  	</div>
 </div>

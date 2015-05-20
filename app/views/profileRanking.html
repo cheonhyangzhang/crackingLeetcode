@@ -25,7 +25,9 @@
 				<tr ng-repeat="user in users">
 					<td>
 					<img ng-src="{{user.avatar}}" width="30" height="30" alt="folder" class="img-circle"> 
-					<a href="/#/profile/{{user.email}}"><span>{{user.displayName}} </span></a>
+					<a ng-show="user.displayName" href="/#/profile/{{user.email}}"><span>{{user.displayName}}</span></a>
+					<a ng-show="!user.displayName" href="/#/profile/{{user.email}}"><span>{{user.email}}</span></a>
+				
 					</td>
 					<td>
 					{{user.sovled_statics.algorithms.Easy}}

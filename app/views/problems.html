@@ -3,16 +3,23 @@
     Compose
   </a>
 </div>
-<h4> Overall </h4>
+<div class = "txzhang-header">
+<h4>
+<img ng-src="{{userProfile.avatar}}" width="30" height="30" alt="folder" class="img-circle"> 
+<span ng-show="userProfile.displayName" style="font-size:20px;" ng-bind="userProfile.displayName"></span>
+<span ng-show="!userProfile.displayName" style="font-size:20px;" ng-bind="userProfile.email"></span>
+</h4>
+
 <progressbar animate="false" value="(solutions.length * 100 ) / problems.length" max="100" style="min-width:2em;" type="success"><b>{{solutions.length}}/{{problems.length}}</b></progressbar>
 <div class = "txzhang-header">
   <span class="col-sm-4">Easy: {{solved['Easy']}} / {{totals['Easy']}} </span>
   <span class="col-sm-4">Medium: {{solved['Medium']}} / {{totals['Medium']}} </span>
   <span class="col-sm-4">Hard: {{solved['Hard']}} / {{totals['Hard']}} </span>
 </div>
+</div>
 
-<h4> Not solved </h4>
-<table class="table table-striped">
+<h4 ng-show="user.email == userProfile.email" > Not solved </h4>
+<table ng-show="user.email == userProfile.email" class="table table-striped">
   <tr>
     <td>
       
@@ -98,14 +105,18 @@
        </div>
     </td>   
     <td>
-      <a href="/#/{{user.email}}/{{type}}/solution/{{problem.no}}">
+      <a href="/#/{{userProfile.email}}/{{type}}/solution/{{problem.no}}">
       {{problem.no}}
       </a>
     </td>
     <td>
-      <a ng-if="problem.url" target="_blank" href="{{problem.url}}">
+      <a ng-if="problem.url&&user.email==userProfile.email" target="_blank" href="{{problem.url}}">
       {{problem.title}}
       </a>
+      <a ng-if="problem.url&&user.email!=userProfile.email" href="/#/{{userProfile.email}}/{{type}}/solution/{{problem.no}}">
+      {{problem.title}}
+      </a>
+
       <span ng-if="!problem.url">
       {{problem.title}}
       </span>

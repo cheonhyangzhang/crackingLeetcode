@@ -11,7 +11,16 @@
     <span ng-show="solution.onmyself =='No'" style="color:red;" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 
 	<a ng-show="useremail == user.email && editmode == false" ng-click="switchmode()" class="btn btn-primary pull-right" ng-disabled="editmode"> <span>Edit</span> </a>
-	<a ng-show="useremail == user.email && editmode == true" ng-click="save()" class="btn btn-primary pull-right" ng-disabled="!editmode&problem_loaded&solution_loaded"> <span>Save</span> </a>
+	<a ng-show="useremail == user.email && editmode == true" ng-click="save()" class="btn btn-primary pull-right" ng-disabled="!editmode&&problem_loaded&&solution_loaded"> <span>Save</span> </a>
+
+
+	<span ng-show="userProfile.email!=user.email" class="pull-right">
+		by
+	<img ng-src="{{userProfile.avatar}}" width="30" height="30" alt="folder" class="img-circle"> 
+ 	<span ng-show="userProfile.displayName" style="font-size:20px;" ng-bind="userProfile.displayName"></span>
+  	<span ng-show="!userProfile.displayName" style="font-size:20px;" ng-bind="userProfile.email"></span>
+	</span>
+ 
 </div>
 
 

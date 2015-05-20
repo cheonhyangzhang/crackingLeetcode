@@ -8,7 +8,8 @@
  * Controller of the crackingLeetcodeApp
  */
 angular.module('crackingLeetcodeApp')
-  .controller('SolutionCtrl', function ($scope, $routeParams, $sce) {
+  .controller('SolutionCtrl', function ($scope, $routeParams, $sce, userService) {
+    // editmode&problem_loaded&solution_loaded
     $scope.editmode = false;
     $scope.user = auth_user;
     $scope.no = $routeParams.no;
@@ -16,6 +17,13 @@ angular.module('crackingLeetcodeApp')
     $scope.useremail = $routeParams.useremail;
     $scope.problem_loaded = false;
     $scope.solution_loaded = false;
+
+    userService.get($routeParams.useremail, function(resp){
+      $scope.userProfile = resp.result;
+      console.log("userProfile");
+      console.log($scope.userProfile);
+      $scope.$apply();
+    });
     $scope.switchmode = function(){
       $scope.editmode = !$scope.editmode;
     }
