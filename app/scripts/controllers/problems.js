@@ -50,13 +50,16 @@ angular.module('crackingLeetcodeApp')
 	      $.each($scope.solutions, function(index, value){
         	$scope.detailedProblems[value.no] = {'solution' : value};
         	// $scope.detailedProblems[value.no]['solution'] = value;
+          $scope.solutions[index].no = parseInt($scope.solutions[index].no);
 	      });
         $.each($scope.problems, function(index, value){
           if (value.no in $scope.detailedProblems){
+            value.no = parseInt(value.no);
             $scope.solvedProblems.push(value);
             $scope.solved[value.difficulty] +=1;
           } 
           else{
+            value.no = parseInt(value.no);
             $scope.toSolveProblems.push(value);
           }
           $scope.totals[value.difficulty] +=1;

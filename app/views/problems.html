@@ -37,7 +37,7 @@
       Difficulty
     </td>
   </tr>
-  <tr ng-repeat="problem in toSolveProblems">
+  <tr ng-repeat="problem in toSolveProblems | orderBy:'no' ">
         
     <td>
       <a href="/#/{{user.email}}/{{type}}/solution/{{problem.no}}">
@@ -85,7 +85,7 @@
       Difficulty
     </td>
   </tr>
-  <tr ng-repeat="problem in solvedProblems">
+  <tr ng-repeat="problem in solvedProblems | orderBy:'no'">
     <td>
       <div ng-if="!detailedProblems[problem.no]"> 
         <span style="color:orange;" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
