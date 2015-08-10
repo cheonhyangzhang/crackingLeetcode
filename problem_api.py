@@ -22,6 +22,14 @@ class ProblemMessage(messages.Message):
 	url = messages.StringField(6)
 	atype = messages.StringField(7)
 
+class ProblemSimpleMessage(messages.Message):
+	no = messages.StringField(1)
+	title = messages.StringField(2)
+	tags = messages.StringField(3, repeated = True)
+	difficulty = messages.StringField(4)
+	url = messages.StringField(5)
+	atype = messages.StringField(6)
+
 class NoMessage(messages.Message):
 	no = messages.StringField(1)
 	atype = messages.StringField(2)
@@ -39,10 +47,27 @@ class SolutionMessage(messages.Message):
 	atype = messages.StringField(10)
 	lang = messages.StringField(11)
 	own_difficulty = messages.StringField(12)
+
+class SolutionSimpleMessage(messages.Message):
+	no = messages.StringField(1)
+	title = messages.StringField(2)
+	tags = messages.StringField(3, repeated = True)
+	difficulty = messages.StringField(4)
+	time = messages.StringField(5)
+	onmyself = messages.StringField(6)
+	atype = messages.StringField(7)
+	lang = messages.StringField(8)
+	own_difficulty = messages.StringField(9)
+class ListSolutionSimpleMessage(messages.Message):
+	solutions = messages.MessageField(SolutionSimpleMessage, 1, repeated = True)
 class ListSolutionMessage(messages.Message):
 	solutions = messages.MessageField(SolutionMessage, 1, repeated = True)
 class ListProblemMessage(messages.Message):
 	problems = messages.MessageField(ProblemMessage, 1, repeated = True)
+
+
+class ListProblemSimpleMessage(messages.Message):
+	problems = messages.MessageField(ProblemSimpleMessage, 1, repeated = True)
 
 class AccountIdMessage(messages.Message):
 	account = messages.StringField(1)
@@ -122,7 +147,7 @@ class ProblemAPI(remote.Service):
 				description = problem.description,
 				atype = problem.atype
 			)
-	@endpoints.method(TypeMessage, ListProblemMessage,
+	@endpoints.method(TypeMessage, ListProblemSimpleMessage,
 		name='list',
 		path='problem/list',
 		http_method='GET'
@@ -134,17 +159,16 @@ class ProblemAPI(remote.Service):
 		problems_message = []
 		for problem in problems:
 			problems_message.append(
-				ProblemMessage(
+				ProblemSimpleMessage(
 					no=problem.no,
 					title=problem.title,
 					tags = problem.tags,
 					difficulty = problem.difficulty,
-					description = problem.description,
 					url = problem.url,
 					)
 				)
 
-		return ListProblemMessage(
+		return ListProblemSimpleMessage(
 				problems = problems_message
 			)
 
@@ -233,7 +257,7 @@ class SolutionAPI(remote.Service):
 				solution.put()
 		return EmptyMessage()
 
-	@endpoints.method(AccountIdMessage, ListSolutionMessage,
+	@endpoints.method(AccountIdMessage, ListSolutionSimpleMessage,
 		name='list',
 		path='solution/list',
 		http_method='GET'
@@ -249,21 +273,18 @@ class SolutionAPI(remote.Service):
 		solutions_message = []
 		for solution in solutions:
 			solutions_message.append(
-				SolutionMessage(
+				SolutionSimpleMessage(
 					no=solution.no,
 					title=solution.title,
-					solution = solution.solution,
-					analysis = solution.analysis,
 					tags = solution.tags,
 					difficulty = solution.difficulty,
 					own_difficulty = solution.own_difficulty,
 					time = solution.time,
-					owner = solution.owner,
-					lang = solution.lang,
-					onmyself = solution.onmyself 
+					onmyself = solution.onmyself,
+					lang = solution.lang
 					)
 				)
-		return ListSolutionMessage(
+		return ListSolutionSimpleMessage(
 									solutions = solutions_message
 									)
 
