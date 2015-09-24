@@ -32,7 +32,7 @@
         <div class="pull-right dropdown" dropdown>
             <span class="visible-lg-inline-block visible-md-inline-block visible-sm-inline-block" style="margin-top:10px;margin-right:10px;" ng-bind="user.email">
             </span>
-            <img ng-src="{{user.image.url}}" width="30" height="30" alt="folder" class="img-circle dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
+            <img ng-cloak ng-src="{{user.image.url}}" width="30" height="30" alt="folder" class="img-circle dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
             <ul class="dropdown-menu" role="menu">
                     <li ><a href="#/profile/{{user.email}}"> Profile </a></li>
             </ul>

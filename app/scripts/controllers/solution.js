@@ -42,14 +42,20 @@ angular.module('crackingLeetcodeApp')
       $scope.solution.difficulty = $scope.problem.difficulty;
       gapi.client.crackingleetcode.solution.insert($scope.solution).execute(function(resp) {
         console.log(resp);
-        $scope.$apply();
-        $('#code-snippet').html($scope.htmlcode($scope.solution.solution));
-        $('pre code').each(function(i, block) {
-            hljs.highlightBlock(block);
-        });
-        gapi.client.crackingleetcode.user.count({'email':$scope.user.email}).execute(function(resp) {
-            console.log("count finished");
-        });
+        if (resp.code){
+          alert("Save failed");
+        }
+        else{
+          $scope.$apply();
+          $('#code-snippet').html($scope.htmlcode($scope.solution.solution));
+          $('pre code').each(function(i, block) {
+              hljs.highlightBlock(block);
+          });
+          gapi.client.crackingleetcode.user.count({'email':$scope.user.email}).execute(function(resp) {
+              console.log("count finished");
+          });
+        }
+        
       });
 
     }
