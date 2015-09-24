@@ -2,26 +2,19 @@
 
 /**
  * @ngdoc function
- * @name crackingLeetcodeApp.controller:AboutCtrl
+ * @name crackingLeetcodeApp.controller:ProfileCtrl
  * @description
- * # AboutCtrl
+ * # ProfileCtrl
  * Controller of the crackingLeetcodeApp
  */
 angular.module('crackingLeetcodeApp')
   .controller('ProfileCtrl', function ($scope, $routeParams, $rootScope, authService, userService) {
-  	console.log($scope.user);
-  	console.log($rootScope);
-  	console.log($scope);
+    $rootScope.title ="Profile - " + $routeParams.useremail;
     $scope.useremail = $routeParams.useremail;
     userService.get($scope.useremail, function(resp){
       $scope.userProfile = resp.result;
       $scope.$apply();
     });
-  	// gapi.client.crackingleetcode.problem.list().execute(function(resp) {
-   //      console.log(resp);
-   //      $scope.problems = resp.problems;
-   //      $scope.$apply();
-   //   });
 
     $scope.save = function(){
       console.log("save");

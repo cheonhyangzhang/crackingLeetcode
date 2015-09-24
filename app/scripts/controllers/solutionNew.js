@@ -8,7 +8,8 @@
  * Controller of the crackingLeetcodeApp
  */
 angular.module('crackingLeetcodeApp')
-  .controller('SolutionNewCtrl', function ($scope, $location) {
+  .controller('SolutionNewCtrl', function ($rootScope, $scope, $location) {
+    $rootScope.title ="New solution";
     $scope.user = auth_user;
     $scope.solution = {}
     $scope.solution.onmyself = 'Yes';

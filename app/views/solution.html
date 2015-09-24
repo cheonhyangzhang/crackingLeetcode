@@ -1,6 +1,14 @@
 
 
+<div ng-show="loading">
+  <div class="loader">
+    <svg class="circular">
+      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+  </div>
+</div>
 
+<div ng-show="!loading">
 
 <div class = "txzhang-header">
 	<a href="/#/{{useremail}}/{{type}}/problems" class="glyphicon glyphicon-chevron-left txzhang-hover-pointer txzhang-a"  aria-hidden="true"></a>
@@ -130,6 +138,7 @@
 </div>
 
 
+</div>
 
 
 

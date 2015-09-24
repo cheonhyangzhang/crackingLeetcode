@@ -1,8 +1,17 @@
+
+<div ng-show="loading">
+  <div class="loader">
+    <svg class="circular">
+      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+  </div>
+</div>
+
+<div ng-show="!loading">
+
 <div class = "txzhang-header">
   <span style="font-size:20px;"> Ranking </span>
 </div>
-
-
 
 			<table class="table table-bordered">
 				<tr>
@@ -43,3 +52,5 @@
 					</td>
 				</tr>
 			</table>
+
+</div>

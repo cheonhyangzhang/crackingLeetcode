@@ -10,6 +10,7 @@
 angular.module('crackingLeetcodeApp')
   .controller('ProfileRankingCtrl', function ($scope, $routeParams, $rootScope, authService, userService) {
   	console.log($scope.user);
+    $scope.loading = true;
     userService.list(function(resp){
       console.log("users");
       console.log(resp);
@@ -20,6 +21,7 @@ angular.module('crackingLeetcodeApp')
       	 value.sovled_statics = JSON.parse(value.sovled_statics);
         }
       });
+      $scope.loading = false;
       $scope.$apply();
     });
 });

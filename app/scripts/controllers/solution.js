@@ -8,8 +8,10 @@
  * Controller of the crackingLeetcodeApp
  */
 angular.module('crackingLeetcodeApp')
-  .controller('SolutionCtrl', function ($scope, $routeParams, $sce, userService) {
-    // editmode&problem_loaded&solution_loaded
+  .controller('SolutionCtrl', function ($rootScope, $scope, $routeParams, $sce, userService) {
+    // editmode&problem_loaded&solution_lo$aded
+    $rootScope.title =$routeParams.type + " solution - " + $routeParams.no;
+    $scope.loading = true;
     $scope.editmode = false;
     $scope.user = auth_user;
     $scope.no = $routeParams.no;
@@ -98,6 +100,7 @@ angular.module('crackingLeetcodeApp')
         });
       }
       $scope.solution_loaded = true;
+      $scope.loading = false;
       $scope.$apply();
     });
 

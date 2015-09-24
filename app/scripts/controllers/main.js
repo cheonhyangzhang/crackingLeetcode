@@ -10,9 +10,4 @@
 angular.module('crackingLeetcodeApp')
   .controller('MainCtrl', function ($scope, $rootScope) {
   	$rootScope.title = "Home - Cracking Leetcode";
-  	console.log("user:");
-  	console.log($scope.user);
-
-
-
   });

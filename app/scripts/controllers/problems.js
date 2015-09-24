@@ -8,9 +8,10 @@
  * Controller of the crackingLeetcodeApp
  */
 angular.module('crackingLeetcodeApp')
-  .controller('ProblemsCtrl', function ($scope, $routeParams, userService) {
+  .controller('ProblemsCtrl', function ($rootScope, $scope, $routeParams, userService) {
   	console.log("ProblemCtrl");
-  	console.log($scope.user);
+    $rootScope.title = "Problems - Cracking Leetcode";
+    $scope.loading = true;
   	$scope.type = $routeParams.type;
     $scope.toSolveProblems = [];
     $scope.solvedProblems = [];
@@ -65,6 +66,7 @@ angular.module('crackingLeetcodeApp')
           $scope.totals[value.difficulty] +=1;
         });
 	      // console.log($scope.detailedProblems);
+        $scope.loading = false;
 	      $scope.$apply();
 	    });
     });
